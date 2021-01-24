@@ -1,0 +1,24 @@
+{
+  "name": "multipurpose-api-deploy",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "cdk-bootstrap": "cdk bootstrap",
+    "cdk-synth": "npm run build && cdk synth > ../template.yaml",
+    "cdk-deploy": "npm run build && cdk deploy",
+    "cdk-destroy": "npm run build && cdk destroy"
+  },
+  "devDependencies": {
+    "@aws-cdk/aws-apigateway": "1.80.0",
+    "@aws-cdk/aws-lambda": "1.80.0",
+    "@aws-cdk/aws-s3-deployment": "1.80.0",
+    "@aws-cdk/core": "1.80.0",
+    "@aws-cdk/aws-dynamodb": "1.80.0",
+    "aws-cdk": "1.80.0",
+    "ts-node": "^9.1.1",
+    "@types/node": "10.17.27",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {}
+}
