@@ -1,9 +1,14 @@
 import { AssetCode, Function, Runtime, IFunction } from "@aws-cdk/aws-lambda";
 import {
+  IApiKey,
   LambdaIntegration,
   LambdaRestApi,
+  Period,
   RestApi,
+  DomainName,
+  EndpointType,
 } from "@aws-cdk/aws-apigateway";
+import { Certificate } from "@aws-cdk/aws-certificatemanager";
 import { Construct, Duration } from "@aws-cdk/core";
 import {
   AttributeType,
@@ -22,6 +27,8 @@ export class CreateMahabaratAWSResources extends Construct {
   private mahabharatCharactersTable: DynamoDBTable;
   private mahabharatRelationshipTable: DynamoDBTable;
   public mahabharatAPI: LambdaRestApi;
+  public domainName: DomainName;
+  private mahabharatAPIKey: IApiKey;
 
   constructor(
     parent: Construct,
@@ -36,6 +43,7 @@ export class CreateMahabaratAWSResources extends Construct {
     // this.createMahabharatTables();
 
     this.createMahabharatAPI();
+    this.createDomainName();
   }
 
   private createMahabharatTables() {
@@ -100,16 +108,49 @@ export class CreateMahabaratAWSResources extends Construct {
     );
   }
 
+  private createDomainName() {
+    const certificateArn =
+      "arn:aws:acm:ap-southeast-2:175468255336:certificate/52ff0f9e-945f-4158-aac9-d6d140a87e3e";
+    const certificate = Certificate.fromCertificateArn(
+      this,
+      "Certificate",
+      certificateArn
+    );
+
+    this.domainName = new DomainName(this, "custom-domain-name-vpurush", {
+      certificate,
+      domainName: "api.vpurush.com",
+      endpointType: EndpointType.REGIONAL,
+      mapping: this.mahabharatAPI,
+    });
+  }
+
   private createMahabharatAPI() {
     this.mahabharatAPI = new RestApi(this, "mahabharat-api", {
       restApiName: "mahabharat-api",
     });
 
     this.mahabharatAPI.root
-      .addResource(API_RESOURCE_URLS.MAHABARAT_CHARACTER_MAP)
+      .addResource(API_RESOURCE_URLS.MAHABARAT_CHARACTER_MAP, {
+        defaultCorsPreflightOptions: {
+          allowOrigins: ["*.vpurush.com"],
+        },
+      })
       .addMethod(
         "GET",
         new LambdaIntegration(this.mahabharatGetCharacterMapLambdaFunction)
       );
+
+    // this.mahabharatAPIKey = this.mahabharatAPI.addApiKey("mahabharat-api-key", {
+    //   apiKeyName: "mahabharat-api-key",
+    //   value: "mahabharat-api-key-low-usage",
+    // });
+    // this.mahabharatAPI.addUsagePlan("mahabharat-usage-plan", {
+    //   apiKey: this.mahabharatAPIKey,
+    //   quota: {
+    //     limit: 10000,
+    //     period: Period.MONTH,
+    //   },
+    // });
   }
 }

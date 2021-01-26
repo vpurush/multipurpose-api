@@ -43,12 +43,6 @@ export const Characters: Character[] = [
     descriptions: ["prayed to shiva"],
   },
   {
-    name: "gandhari",
-    displayName: "Gandhari",
-    otherNames: [],
-    descriptions: [],
-  },
-  {
     name: "bali",
     displayName: "Bali",
     otherNames: [],
@@ -95,12 +89,6 @@ export const Characters: Character[] = [
     displayName: "Devaki",
     otherNames: [],
     descriptions: ["her eighth child would kill Kansa"],
-  },
-  {
-    name: "gandhari",
-    displayName: "Gandhari",
-    otherNames: [],
-    descriptions: [],
   },
   {
     name: "rohini",
@@ -208,12 +196,6 @@ export const Characters: Character[] = [
     descriptions: ["Sage"],
   },
   {
-    name: "dhaumya",
-    displayName: "Dhaumya",
-    otherNames: [],
-    descriptions: [],
-  },
-  {
     name: "lakshmanan",
     displayName: "Lakshmanan",
     otherNames: [],
@@ -274,12 +256,6 @@ export const Characters: Character[] = [
     descriptions: ["Pritha of Mathura"],
   },
   {
-    name: "gandhari",
-    displayName: "Gandhari",
-    otherNames: [],
-    descriptions: [],
-  },
-  {
     name: "madri",
     displayName: "Madri",
     otherNames: [],
@@ -295,12 +271,6 @@ export const Characters: Character[] = [
     name: "ashwattahma",
     displayName: "Ashwattahma",
     otherNames: ["Ashwatama"],
-    descriptions: [],
-  },
-  {
-    name: "kripa",
-    displayName: "Kripa",
-    otherNames: [],
     descriptions: [],
   },
   {
@@ -379,12 +349,6 @@ export const Characters: Character[] = [
     name: "vyasa",
     displayName: "Vyasa",
     otherNames: ["Krisha Dwaipayana"],
-    descriptions: [],
-  },
-  {
-    name: "amba",
-    displayName: "Amba",
-    otherNames: [],
     descriptions: [],
   },
   {

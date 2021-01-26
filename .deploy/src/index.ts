@@ -27,8 +27,12 @@ class CreateMahabaratAWSResourcesStack extends cdk.Stack {
       {}
     );
 
-    new CfnOutput(this, "Mahabharat character map URL", {
+    new CfnOutput(this, "Mahabharat character map AWS URL", {
       value: `https://${mahabharatAWSResources.mahabharatAPI.restApiId}.execute-api.${this.region}.amazonaws.com/${API_RESOURCE_URLS.MAHABARAT_CHARACTER_MAP}`,
+    });
+
+    new CfnOutput(this, "Mahabharat character map domain URL", {
+      value: `https://api.vpurush.com/${API_RESOURCE_URLS.MAHABARAT_CHARACTER_MAP}`,
     });
   }
 }
