@@ -1,90 +1,46 @@
-import AWS from "aws-sdk";
 import {
   APIGatewayProxyEvent,
   Context,
   APIGatewayProxyResult,
   Callback,
+  Handler,
 } from "aws-lambda";
-import { Character } from "../data/mahabharat/characters";
-import { Relationship } from "../data/mahabharat/relationship";
+import { Characters } from "../data/mahabharat/characters";
+import { Relationships } from "../data/mahabharat/relationship";
+import { validateData } from "./loadData";
 
-const docClient = new AWS.DynamoDB.DocumentClient();
+const validationErrors = validateData();
 
-export type Handler<TEvent = any, TResult = any> = (
-  event: TEvent,
-  context: Context,
-  callback: Callback<TResult>
-) => void | Promise<TResult>;
-
-export const GetCharacterMap = async (
+export const GetCharacterMap = (
   event: APIGatewayProxyEvent,
-  context: Context
-): Promise<APIGatewayProxyResult> => {
-  console.log("start");
-
-  return new Promise(async (apiResolve, apiReject) => {
-    try {
-      const charactersPromise = new Promise<Character[]>((resolve, reject) => {
-        docClient.scan(
-          {
-            TableName: "mahabharat-characters",
-          },
-          (err, data) => {
-            if (err) {
-              console.log("error occurred", err.message);
-              reject(err);
-            } else if (data && data.Items) {
-              console.log("Query succeeded.", data.Items);
-              resolve(data.Items as Character[]);
-            } else {
-              console.error("Unknown error");
-              reject({
-                message: `Unknown error`,
-              });
-            }
-          }
-        );
-      });
-
-      const relationshipsPromise = new Promise<Relationship[]>(
-        async (resolve, reject) => {
-          docClient.scan(
-            {
-              TableName: "mahabharat-relationship",
-            },
-            (err, data) => {
-              if (err) {
-                console.log("error occurred", err.message);
-                reject(err);
-              } else if (data && data.Items) {
-                console.log("Query succeeded.", data.Items);
-                resolve(data.Items as Relationship[]);
-              } else {
-                console.error("Unknown error");
-                reject({
-                  message: `Unknown error`,
-                });
-              }
-            }
-          );
-        }
+  context: Context,
+  callback: Callback<APIGatewayProxyResult>
+): void | Promise<APIGatewayProxyResult> => {
+  console.log("GetCharacterMap start");
+  try {
+    if (validationErrors.length > 0) {
+      console.log("GetCharacterMap: there were validation errors");
+      callback(
+        new Error(
+          `There were validation errors: ${validationErrors
+            .map((v) => v.message)
+            .join("\n")}`
+        )
       );
-
-      const characters = await charactersPromise;
-      const relationships = await relationshipsPromise;
-
-      apiResolve({
-        statusCode: 200,
-        body: JSON.stringify({
-          characters,
-          relationships,
-        }),
-      });
-    } catch (e) {
-      apiReject({
-        statusCode: 500,
-        body: e.message,
-      });
+      return;
     }
-  });
+    console.log("GetCharacterMap: there were no validation errors");
+
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify({
+        characters: Characters,
+        relationships: Relationships,
+      }),
+    });
+    console.log("GetCharacterMap end");
+  } catch (e) {
+    callback(new Error(e.message));
+    console.log(`GetCharacterMap: unknown error occurred ${e.message}`);
+  }
 };

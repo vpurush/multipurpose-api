@@ -24,7 +24,7 @@ export type Relationship = {
   }[];
 };
 
-export const RelationShips: Relationship[] = [
+export const Relationships: Relationship[] = [
   {
     fromCharacter: "parasurama",
     toCharacter: "bhima",

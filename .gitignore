@@ -103,9 +103,12 @@ dist
 # TernJS port file
 .tern-port
 
-*.js
 *.d.ts
+
+.deploy/src/*.js
 
 asset.*/*
 build/*
+lib/*
 */cdk.out/*
+*.zip

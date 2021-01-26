@@ -16,6 +16,8 @@ Start container and attach to it (last command in docker-commands.sh needs to st
 
 ## Development
 
+`npm run compress`
+
 Navigate to .deploy folder
 
 `npm run cdk-synth`

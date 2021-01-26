@@ -15,12 +15,10 @@ type CreateMahabaratAWSResourcesProps = {};
 
 export const API_RESOURCE_URLS = {
   MAHABARAT_CHARACTER_MAP: "mahabharat-character-map",
-  MAHABARAT_LOAD_DATA: "mahabharat-load-data",
 };
 
 export class CreateMahabaratAWSResources extends Construct {
   private mahabharatGetCharacterMapLambdaFunction: IFunction;
-  private mahabharatLoadDataLambdaFunction: IFunction;
   private mahabharatCharactersTable: DynamoDBTable;
   private mahabharatRelationshipTable: DynamoDBTable;
   public mahabharatAPI: LambdaRestApi;
@@ -92,21 +90,7 @@ export class CreateMahabaratAWSResources extends Construct {
       "multipurpose-api-lambda-mahabharat-getcharactermap",
       {
         functionName: "multipurpose-api-lambda-mahabharat-getcharactermap",
-        handler: "lib/mahabharat/index.GetCharacterMap",
-        runtime: Runtime.NODEJS_12_X,
-        code: new AssetCode(`./multipurpose-api.zip`),
-        memorySize: 128,
-        timeout: Duration.seconds(5),
-        environment: {},
-      }
-    );
-
-    this.mahabharatLoadDataLambdaFunction = new Function(
-      this,
-      "multipurpose-api-lambda-mahabharat-loaddata",
-      {
-        functionName: "multipurpose-api-lambda-mahabharat-loaddata",
-        handler: "lib/mahabharat/index.LoadData",
+        handler: "lib/getCharacterMap.GetCharacterMap",
         runtime: Runtime.NODEJS_12_X,
         code: new AssetCode(`./multipurpose-api.zip`),
         memorySize: 128,
@@ -126,13 +110,6 @@ export class CreateMahabaratAWSResources extends Construct {
       .addMethod(
         "GET",
         new LambdaIntegration(this.mahabharatGetCharacterMapLambdaFunction)
-      );
-
-    this.mahabharatAPI.root
-      .addResource(API_RESOURCE_URLS.MAHABARAT_LOAD_DATA)
-      .addMethod(
-        "GET",
-        new LambdaIntegration(this.mahabharatLoadDataLambdaFunction)
       );
   }
 }

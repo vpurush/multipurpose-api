@@ -22,7 +22,7 @@ Resources:
     Properties:
       Code:
         S3Bucket:
-          Ref: AssetParametersdb3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23S3Bucket1B3A2D44
+          Ref: AssetParameters50e5446594261ec166609ce16e76ca70754ddbb6a26eabee651fc1fae286d403S3Bucket5D28E9B0
         S3Key:
           Fn::Join:
             - ""
@@ -30,13 +30,13 @@ Resources:
                   - 0
                   - Fn::Split:
                       - "||"
-                      - Ref: AssetParametersdb3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23S3VersionKeyD5CA0D01
+                      - Ref: AssetParameters50e5446594261ec166609ce16e76ca70754ddbb6a26eabee651fc1fae286d403S3VersionKey4A90999D
               - Fn::Select:
                   - 1
                   - Fn::Split:
                       - "||"
-                      - Ref: AssetParametersdb3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23S3VersionKeyD5CA0D01
-      Handler: lib/mahabharat/index.GetCharacterMap
+                      - Ref: AssetParameters50e5446594261ec166609ce16e76ca70754ddbb6a26eabee651fc1fae286d403S3VersionKey4A90999D
+      Handler: lib/getCharacterMap.GetCharacterMap
       Role:
         Fn::GetAtt:
           - CreateMahabaratAWSResourcesmultipurposeapilambdamahabharatgetcharactermapServiceRole5D00E6BD
@@ -49,59 +49,7 @@ Resources:
       - CreateMahabaratAWSResourcesmultipurposeapilambdamahabharatgetcharactermapServiceRole5D00E6BD
     Metadata:
       aws:cdk:path: CreateMahabaratAWSResourcesStack/CreateMahabaratAWSResources/multipurpose-api-lambda-mahabharat-getcharactermap/Resource
-      aws:asset:path: asset.db3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23.zip
-      aws:asset:property: Code
-  CreateMahabaratAWSResourcesmultipurposeapilambdamahabharatloaddataServiceRoleFC414F04:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Statement:
-          - Action: sts:AssumeRole
-            Effect: Allow
-            Principal:
-              Service: lambda.amazonaws.com
-        Version: "2012-10-17"
-      ManagedPolicyArns:
-        - Fn::Join:
-            - ""
-            - - "arn:"
-              - Ref: AWS::Partition
-              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-    Metadata:
-      aws:cdk:path: CreateMahabaratAWSResourcesStack/CreateMahabaratAWSResources/multipurpose-api-lambda-mahabharat-loaddata/ServiceRole/Resource
-  CreateMahabaratAWSResourcesmultipurposeapilambdamahabharatloaddataA2014207:
-    Type: AWS::Lambda::Function
-    Properties:
-      Code:
-        S3Bucket:
-          Ref: AssetParametersdb3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23S3Bucket1B3A2D44
-        S3Key:
-          Fn::Join:
-            - ""
-            - - Fn::Select:
-                  - 0
-                  - Fn::Split:
-                      - "||"
-                      - Ref: AssetParametersdb3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23S3VersionKeyD5CA0D01
-              - Fn::Select:
-                  - 1
-                  - Fn::Split:
-                      - "||"
-                      - Ref: AssetParametersdb3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23S3VersionKeyD5CA0D01
-      Handler: lib/mahabharat/index.LoadData
-      Role:
-        Fn::GetAtt:
-          - CreateMahabaratAWSResourcesmultipurposeapilambdamahabharatloaddataServiceRoleFC414F04
-          - Arn
-      Runtime: nodejs12.x
-      FunctionName: multipurpose-api-lambda-mahabharat-loaddata
-      MemorySize: 128
-      Timeout: 5
-    DependsOn:
-      - CreateMahabaratAWSResourcesmultipurposeapilambdamahabharatloaddataServiceRoleFC414F04
-    Metadata:
-      aws:cdk:path: CreateMahabaratAWSResourcesStack/CreateMahabaratAWSResources/multipurpose-api-lambda-mahabharat-loaddata/Resource
-      aws:asset:path: asset.db3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23.zip
+      aws:asset:path: asset.50e5446594261ec166609ce16e76ca70754ddbb6a26eabee651fc1fae286d403.zip
       aws:asset:property: Code
   CreateMahabaratAWSResourcesmahabharatapi873664F6:
     Type: AWS::ApiGateway::RestApi
@@ -138,7 +86,7 @@ Resources:
       - CreateMahabaratAWSResourcesmahabharatapi873664F6
     Metadata:
       aws:cdk:path: CreateMahabaratAWSResourcesStack/CreateMahabaratAWSResources/mahabharat-api/Account
-  CreateMahabaratAWSResourcesmahabharatapiDeploymentECAC2EFE8901a2e06c14103068698d80c997305e:
+  CreateMahabaratAWSResourcesmahabharatapiDeploymentECAC2EFEf78ffe857612a0b7a13f76301796122c:
     Type: AWS::ApiGateway::Deployment
     Properties:
       RestApiId:
@@ -147,8 +95,6 @@ Resources:
     DependsOn:
       - CreateMahabaratAWSResourcesmahabharatapimahabharatcharactermapGET1B49E0BC
       - CreateMahabaratAWSResourcesmahabharatapimahabharatcharactermapEB3E8AE3
-      - CreateMahabaratAWSResourcesmahabharatapimahabharatloaddataGET966D3E0A
-      - CreateMahabaratAWSResourcesmahabharatapimahabharatloaddata2C4AC655
     Metadata:
       aws:cdk:path: CreateMahabaratAWSResourcesStack/CreateMahabaratAWSResources/mahabharat-api/Deployment/Resource
   CreateMahabaratAWSResourcesmahabharatapiDeploymentStageprod79B2FA4E:
@@ -157,7 +103,7 @@ Resources:
       RestApiId:
         Ref: CreateMahabaratAWSResourcesmahabharatapi873664F6
       DeploymentId:
-        Ref: CreateMahabaratAWSResourcesmahabharatapiDeploymentECAC2EFE8901a2e06c14103068698d80c997305e
+        Ref: CreateMahabaratAWSResourcesmahabharatapiDeploymentECAC2EFEf78ffe857612a0b7a13f76301796122c
       StageName: prod
     Metadata:
       aws:cdk:path: CreateMahabaratAWSResourcesStack/CreateMahabaratAWSResources/mahabharat-api/DeploymentStage.prod/Resource
@@ -241,86 +187,6 @@ Resources:
               - /invocations
     Metadata:
       aws:cdk:path: CreateMahabaratAWSResourcesStack/CreateMahabaratAWSResources/mahabharat-api/Default/mahabharat-character-map/GET/Resource
-  CreateMahabaratAWSResourcesmahabharatapimahabharatloaddata2C4AC655:
-    Type: AWS::ApiGateway::Resource
-    Properties:
-      ParentId:
-        Fn::GetAtt:
-          - CreateMahabaratAWSResourcesmahabharatapi873664F6
-          - RootResourceId
-      PathPart: mahabharat-load-data
-      RestApiId:
-        Ref: CreateMahabaratAWSResourcesmahabharatapi873664F6
-    Metadata:
-      aws:cdk:path: CreateMahabaratAWSResourcesStack/CreateMahabaratAWSResources/mahabharat-api/Default/mahabharat-load-data/Resource
-  CreateMahabaratAWSResourcesmahabharatapimahabharatloaddataGETApiPermissionCreateMahabaratAWSResourcesStackCreateMahabaratAWSResourcesmahabharatapiCBFC22B3GETmahabharatloaddata677FEE99:
-    Type: AWS::Lambda::Permission
-    Properties:
-      Action: lambda:InvokeFunction
-      FunctionName:
-        Fn::GetAtt:
-          - CreateMahabaratAWSResourcesmultipurposeapilambdamahabharatloaddataA2014207
-          - Arn
-      Principal: apigateway.amazonaws.com
-      SourceArn:
-        Fn::Join:
-          - ""
-          - - "arn:"
-            - Ref: AWS::Partition
-            - ":execute-api:ap-southeast-2:"
-            - Ref: AWS::AccountId
-            - ":"
-            - Ref: CreateMahabaratAWSResourcesmahabharatapi873664F6
-            - /
-            - Ref: CreateMahabaratAWSResourcesmahabharatapiDeploymentStageprod79B2FA4E
-            - /GET/mahabharat-load-data
-    Metadata:
-      aws:cdk:path: CreateMahabaratAWSResourcesStack/CreateMahabaratAWSResources/mahabharat-api/Default/mahabharat-load-data/GET/ApiPermission.CreateMahabaratAWSResourcesStackCreateMahabaratAWSResourcesmahabharatapiCBFC22B3.GET..mahabharat-load-data
-  CreateMahabaratAWSResourcesmahabharatapimahabharatloaddataGETApiPermissionTestCreateMahabaratAWSResourcesStackCreateMahabaratAWSResourcesmahabharatapiCBFC22B3GETmahabharatloaddataD8E993DA:
-    Type: AWS::Lambda::Permission
-    Properties:
-      Action: lambda:InvokeFunction
-      FunctionName:
-        Fn::GetAtt:
-          - CreateMahabaratAWSResourcesmultipurposeapilambdamahabharatloaddataA2014207
-          - Arn
-      Principal: apigateway.amazonaws.com
-      SourceArn:
-        Fn::Join:
-          - ""
-          - - "arn:"
-            - Ref: AWS::Partition
-            - ":execute-api:ap-southeast-2:"
-            - Ref: AWS::AccountId
-            - ":"
-            - Ref: CreateMahabaratAWSResourcesmahabharatapi873664F6
-            - /test-invoke-stage/GET/mahabharat-load-data
-    Metadata:
-      aws:cdk:path: CreateMahabaratAWSResourcesStack/CreateMahabaratAWSResources/mahabharat-api/Default/mahabharat-load-data/GET/ApiPermission.Test.CreateMahabaratAWSResourcesStackCreateMahabaratAWSResourcesmahabharatapiCBFC22B3.GET..mahabharat-load-data
-  CreateMahabaratAWSResourcesmahabharatapimahabharatloaddataGET966D3E0A:
-    Type: AWS::ApiGateway::Method
-    Properties:
-      HttpMethod: GET
-      ResourceId:
-        Ref: CreateMahabaratAWSResourcesmahabharatapimahabharatloaddata2C4AC655
-      RestApiId:
-        Ref: CreateMahabaratAWSResourcesmahabharatapi873664F6
-      AuthorizationType: NONE
-      Integration:
-        IntegrationHttpMethod: POST
-        Type: AWS_PROXY
-        Uri:
-          Fn::Join:
-            - ""
-            - - "arn:"
-              - Ref: AWS::Partition
-              - :apigateway:ap-southeast-2:lambda:path/2015-03-31/functions/
-              - Fn::GetAtt:
-                  - CreateMahabaratAWSResourcesmultipurposeapilambdamahabharatloaddataA2014207
-                  - Arn
-              - /invocations
-    Metadata:
-      aws:cdk:path: CreateMahabaratAWSResourcesStack/CreateMahabaratAWSResources/mahabharat-api/Default/mahabharat-load-data/GET/Resource
   CDKMetadata:
     Type: AWS::CDK::Metadata
     Properties:
@@ -347,13 +213,13 @@ Outputs:
           - Ref: CreateMahabaratAWSResourcesmahabharatapi873664F6
           - .execute-api.ap-southeast-2.amazonaws.com/mahabharat-character-map
 Parameters:
-  AssetParametersdb3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23S3Bucket1B3A2D44:
+  AssetParameters50e5446594261ec166609ce16e76ca70754ddbb6a26eabee651fc1fae286d403S3Bucket5D28E9B0:
     Type: String
-    Description: S3 bucket for asset "db3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23"
-  AssetParametersdb3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23S3VersionKeyD5CA0D01:
+    Description: S3 bucket for asset "50e5446594261ec166609ce16e76ca70754ddbb6a26eabee651fc1fae286d403"
+  AssetParameters50e5446594261ec166609ce16e76ca70754ddbb6a26eabee651fc1fae286d403S3VersionKey4A90999D:
     Type: String
-    Description: S3 key for asset version "db3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23"
-  AssetParametersdb3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23ArtifactHash466CD0F8:
+    Description: S3 key for asset version "50e5446594261ec166609ce16e76ca70754ddbb6a26eabee651fc1fae286d403"
+  AssetParameters50e5446594261ec166609ce16e76ca70754ddbb6a26eabee651fc1fae286d403ArtifactHashF7A9D1C6:
     Type: String
-    Description: Artifact hash for asset "db3504e0bbf87584ef064fd03a93c874376453813588d3c8253954558c6d3f23"
+    Description: Artifact hash for asset "50e5446594261ec166609ce16e76ca70754ddbb6a26eabee651fc1fae286d403"
 

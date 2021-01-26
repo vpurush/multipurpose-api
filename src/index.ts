@@ -1,1 +1,1 @@
-export * from "./mahabharat/index";
+export { GetCharacterMap } from "./mahabharat";
