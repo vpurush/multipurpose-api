@@ -11,7 +11,7 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "remove-tar": "rm .deploy/multipurpose-api.zip | exit 0",
-    "compress": "npm run remove-tar && npm run build:webpack && bestzip .deploy/multipurpose-api.zip ./lib",
+    "build-compress": "npm run remove-tar && npm run build:webpack && bestzip .deploy/multipurpose-api.zip ./lib",
     "copy-data": "cp -r ./src/data asset*/lib",
     "copy-node-modules": "cp -r ./node_modules asset*/lib"
   },

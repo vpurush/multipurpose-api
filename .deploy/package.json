@@ -15,6 +15,7 @@
     "@aws-cdk/aws-dynamodb": "1.80.0",
     "@aws-cdk/aws-lambda": "1.80.0",
     "@aws-cdk/aws-s3-deployment": "1.80.0",
+    "@aws-cdk/aws-sdb": "^1.108.1",
     "@aws-cdk/core": "1.80.0",
     "@types/node": "10.17.27",
     "aws-cdk": "1.80.0",
